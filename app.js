@@ -11,23 +11,40 @@
     function dinoFactory (species, weight, height, diet, where, when, fact) {
         return {
             species: species,
-            weight: weight,
-            height: height,
+            weight: parseInt(weight),
+            height: parseInt(height),
             diet: diet,
             where: where,
             when: when,
             fact: fact,
 
-            compareHeight: function (humanHeight) {
-                return this.height - humanHeight;
+            compareHeight: function (human) {
+                let heightDif = this.height - human.height;
+                
+                if (heightDif < 0) {
+                    return `You are ${Math.abs(heightDif)} inches taller than the average ${this.species}!`
+                } else if (heightDif == 0) {
+                    return `You are the same height as the average ${this.species}!`
+                } else {
+                    return `You are ${Math.abs(heightDif)} inches shorter than the average ${this.species}!`
+                }
+                
             },
 
-            compareWeight: function (humanWeight) {
-                return this.weight - humanWeight;
+            compareWeight: function (human) {
+                let weightDif = this.weight - human.weight;
+                
+                if (weightDif < 0) {
+                    return `You are ${Math.abs(weightDif)} lbs. heavier than the average ${this.species}!`
+                } else if (weightDif == 0) {
+                    return `You are the same weight as the average ${this.species}!`
+                } else {
+                    return `You are ${Math.abs(weightDif)} lbs. lighter than the average ${this.species}!`
+                }
             },
 
-            compareDiet: function (humanDiet) {
-                if (this.diet == humanDiet) {
+            compareDiet: function (human) {
+                if (this.diet == human.diet) {
                     return `The ${this.species} and you are both ${this.diet}s!`
                 } else {
                     return `The ${this.species} and you have different diets! `
@@ -38,13 +55,31 @@
                 return `./images/${this.species}.png`
             },
 
-            generateTile: function () {
+            generateTile: function (human) {
                 let html = `
                  <div class="grid-item">
-                     <img src="${this.getImageUrl()}" alt="${this.species}">        
+                    <h3>${this.species}</h3>
+                    <img src="${this.getImageUrl()}" alt="${this.species}">
+                    <p>${this.getRandomFact(human)}</p>        
                  </div>
                  `
                  return html
+             },
+
+             getRandomFact: function (human) {
+                // Assumes Facts lie between index 1 and n - 3 in object keys
+                let factCount = Object.keys(this).length - 4
+
+                let factKey = Object.keys(this)[1 + Math.floor(Math.random() * factCount)]
+
+                // Check if fact is a comparison method or just a string
+                if (typeof(this[factKey]) == "function" ) {
+                    console.log(factKey)
+                    return this[factKey](human)
+                } else {
+                    return this[factKey]
+                }
+
              }
             
         };
@@ -91,7 +126,8 @@
             generateTile: function () {
                 let html = `
                  <div class="grid-item">
-                     <img src="${this.getImageUrl()}" alt="${this.name}">        
+                    <h3>${this.name}</h3>
+                    <img src="${this.getImageUrl()}" alt="${this.name}">        
                  </div>
                  `
                  return html
@@ -116,7 +152,7 @@
 
         // Hide input form
         form.style.display = "none"
-        
+
         // Make API Call to get Dino Data and make tiles once response is returned
         getDinoData().then( resp => {
             
@@ -124,14 +160,11 @@
             console.log(dinoData)
             for (let i = 0; i < 9; i++) {
                 if (i < 4) {
-                    console.log(dinoData[i].generateTile())
-                    grid.innerHTML += dinoData[i].generateTile()               
+                    grid.innerHTML += dinoData[i].generateTile(human)               
                 } else if (i == 4) {
-                    console.log(human.generateTile())
                     grid.innerHTML += human.generateTile()
                 } else {
-                    console.log(dinoData[i-1].generateTile())
-                    grid.innerHTML += dinoData[i-1].generateTile()
+                    grid.innerHTML += dinoData[i-1].generateTile(human)
                 };
             };       
         });
