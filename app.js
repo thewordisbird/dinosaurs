@@ -162,34 +162,64 @@
     btnSubmit.addEventListener('click', e => {
         const grid = document.getElementById('grid');
         //console.log(createDinos(dinoData))
+        let validationStatus = true;
+        let validationMessage = ''
         let name = inptName.value;
+        if (name == '') {
+            validationStatus = false;
+            validationMessage += 'Please provide your name.\n'}
         let height = parseInt(inptHeightFeet.value) * 12 + parseInt(inptHeightInches.value);
+        if (height <= 0 ) {
+            validationStatus = false;
+            validationMessage += 'Height must be a positive integer value.\n';
+        } else if (inptHeightFeet.value == '' || inptHeightInches.value == '') {
+            validationStatus = false;
+            validationMessage += 'Both Feet and Inches are required.\n'
+        }
         let weight = parseInt(inptWeightLbs.value);
+        console.log(weight)
+        if (weight <= 0) {
+            validationStatus = false;
+            validationMessage += 'Weight must be a positive integer value.\n'
+        } else if (inptWeightLbs.value == '') {
+            validationStatus = false;
+            validationMessage += 'Weight is required\n'
+        }
         let diet = inptDiet.value;
 
-        // Use IIFE to get human data from form
-        const human = (function (name, height, weight, diet) {
-            return humanFactory(name, height, weight, diet)
-        })(name, height, weight, diet);
+        if (validationStatus == false ) {
+            console.log(validationMessage)
+            //TODO: UI Validation 
+        } else {
+            // Use IIFE to get human data from form
+            const human = (function (name, height, weight, diet) {
+                return humanFactory(name, height, weight, diet)
+            })(name, height, weight, diet);
 
-        // Hide input form
-        form.style.display = "none"
+            // Hide input form
+            form.style.display = "none"
 
-        // Make API Call to get Dino Data and make tiles once response is returned
-        getDinoData().then( resp => {
-            
-            let dinoData = createDinos(resp.Dinos);
-            console.log(dinoData)
-            for (let i = 0; i < 9; i++) {
-                if (i < 4) {
-                    grid.innerHTML += dinoData[i].generateTile(human)               
-                } else if (i == 4) {
-                    grid.innerHTML += human.generateTile()
-                } else {
-                    grid.innerHTML += dinoData[i-1].generateTile(human)
-                };
-            };       
-        });
+            // Make API Call to get Dino Data and make tiles once response is returned
+            getDinoData().then( resp => {
+                
+                let dinoData = createDinos(resp.Dinos);
+                console.log(dinoData)
+                for (let i = 0; i < 9; i++) {
+                    if (i < 4) {
+                        grid.innerHTML += dinoData[i].generateTile(human)               
+                    } else if (i == 4) {
+                        grid.innerHTML += human.generateTile()
+                    } else {
+                        grid.innerHTML += dinoData[i-1].generateTile(human)
+                    };
+                };       
+            });
+
+
+        };
+        
+
+        
     })
 
 }());
