@@ -1,5 +1,5 @@
 (function (){
-
+    const form = document.getElementById('dino-compare')
     const inptName = document.getElementById('name');
     const inptHeightFeet = document.getElementById('feet');
     const inptHeightInches = document.getElementById('inches')
@@ -113,6 +113,9 @@
         const human = (function (name, height, weight, diet) {
             return humanFactory(name, height, weight, diet)
         })(name, height, weight, diet);
+
+        // Hide input form
+        form.style.display = "none"
         
         // Make API Call to get Dino Data and make tiles once response is returned
         getDinoData().then( resp => {
@@ -133,6 +136,6 @@
             };       
         });
     })
-    
+
 }());
     
