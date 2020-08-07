@@ -86,9 +86,12 @@
              },
 
              getRandomFact: function (human) {
+                // If species is bird, return the fact
+                if (this.species == 'Pigeon') {
+                    return this.fact.message
+                }
                 // Assumes Facts lie between index 1 and n - 3 in object keys
                 let factCount = Object.keys(this).length - 4
-
                 let factKey = Object.keys(this)[1 + Math.floor(Math.random() * factCount)]
 
                 // Check if fact is a comparison method or just a string
