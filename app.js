@@ -9,17 +9,36 @@
     
     // Dino Object Factory
     function dinoFactory (species, weight, height, diet, where, when, fact) {
+        // TODO: Add number formatting with commas
         return {
             species: species,
-            weight: parseInt(weight),
-            height: parseInt(height),
-            diet: diet,
-            where: where,
-            when: when,
-            fact: fact,
+            weight: {
+                fact: parseInt(weight), 
+                message: `The average ${species} weighed ${weight} lbs.!`
+            },
+            height: {
+                fact: parseInt(height),
+                message: `The average ${species} was ${height} inches tall!`
+            },
+            diet: {
+                fact: diet,
+                message: `The ${species} was a ${diet}!`
+            },
+            where: {
+                fact: where,
+                message: `The ${species} lived in ${where}!`
+            },
+            when: {
+                fact: when,
+                message: `The ${species} lived in the ${when} period!`
+            },
+            fact: {
+                fact: fact,
+                message: fact
+            },
 
             compareHeight: function (human) {
-                let heightDif = this.height - human.height;
+                let heightDif = this.height.fact - human.height;
                 
                 if (heightDif < 0) {
                     return `You are ${Math.abs(heightDif)} inches taller than the average ${this.species}!`
@@ -32,7 +51,7 @@
             },
 
             compareWeight: function (human) {
-                let weightDif = this.weight - human.weight;
+                let weightDif = this.weight.fact - human.weight;
                 
                 if (weightDif < 0) {
                     return `You are ${Math.abs(weightDif)} lbs. heavier than the average ${this.species}!`
@@ -44,8 +63,8 @@
             },
 
             compareDiet: function (human) {
-                if (this.diet == human.diet) {
-                    return `The ${this.species} and you are both ${this.diet}s!`
+                if (this.diet.fact == human.diet) {
+                    return `The ${this.species} and you are both ${this.diet.fact}s!`
                 } else {
                     return `The ${this.species} and you have different diets! `
                 }
@@ -77,7 +96,7 @@
                     console.log(factKey)
                     return this[factKey](human)
                 } else {
-                    return this[factKey]
+                    return this[factKey]['message']
                 }
 
              }
