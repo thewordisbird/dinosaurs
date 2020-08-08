@@ -24,11 +24,23 @@
         <div class="form-container">
             <p>Name:</p>
             <input id="name" class="form-field__full" type="name" name="name" required>
-            <p>Height</p>
-            <label>Feet: <input id="feet" class="form-field__short" type="number" name="feet" required></label>
-            <label>inches: <input id="inches" class="form-field__short" type="number" name="inches" required></label>
-            <p>Weight:</p>
-            <label><input id="weight" class="form-field__full" type="number" name="weight" required>lbs</label>
+            <p>Units:</p>
+            <div class="unit-options">
+                <label> <input class="units" id="imperial" type="radio" checked="checked" name="units">Imperial</label>
+                <label><input class="units" id="metric" type="radio"  name="units">Metric</label>
+            </div>
+            <div id="imperial-fields" class="imperial-fields">
+                <p>Height:</p>
+                <label>Feet: <input id="feet" class="form-field__short" type="number" name="feet" required></label>
+                <label>inches: <input id="inches" class="form-field__short" type="number" name="inches" required></label>
+                <p>Weight:</p>
+                <label><input id="weight" class="form-field__full" type="number" name="weight" required>lbs</label>
+            </div>
+
+            <div id="metric-fields" class="metric-fields">
+                
+            </div>
+            
             <p>Diet:</p>
             <select id="diet" class="form-field__full" name="diet">
                 <option>Herbavor</option>

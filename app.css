@@ -167,6 +167,23 @@ select {
     cursor: pointer;
 }
 
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+
+.unit-options label {
+    
+    margin-right: 1rem;
+}
+
+.unit-options label input{
+    
+    margin-right: .25rem;
+}
+
 /* Footer */
 .fine-print {
     display: block;
