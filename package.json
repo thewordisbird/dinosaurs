@@ -1,0 +1,22 @@
+{
+  "name": "dinosaurs",
+  "version": "1.0.0",
+  "description": "Compare yourself to a dinosaur!",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thewordisbird/dinosaurs.git"
+  },
+  "author": "Justin Bird",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thewordisbird/dinosaurs/issues"
+  },
+  "homepage": "https://github.com/thewordisbird/dinosaurs#readme",
+  "devDependencies": {
+    "eslint": "^7.6.0"
+  }
+}
