@@ -6,6 +6,7 @@
     const chkboxMetric = document.getElementById('metric');
     const inptDiet = document.getElementById('diet');
     const btnSubmit = document.getElementById('btn');
+    const divError = document.getElementById('error');
 
 
     // Units objects
@@ -90,7 +91,7 @@
                 * @param {object} human - Object representing a human with a weight property.
                 * @returns {string} A message comparing the weights of the dinsaur to the human.
                 */
-                let weightDif = this.weight[units]['fact'] - human.weight;
+                let weightDif = this.weight['fact'] - human.weight;
                 
                 if (weightDif < 0) {
                     return `You are ${Math.abs(weightDif)} ${units.weight} heavier than the average ${this.species}!`;
@@ -149,7 +150,7 @@
                 // Assumes Facts lie between index 1 and n - 3 in object keys
                 let factCount = Object.keys(this).length - 4;
                 let factKey = Object.keys(this)[1 + Math.floor(Math.random() * factCount)];
-
+                
                 // Check if fact is a comparison method or just a string
                 if (typeof(this[factKey]) == "function" ) {
                     return this[factKey](human);
@@ -268,7 +269,6 @@
     // Add click event listener to the 'Metric' radio button to set the
     // fields to collect metric data.
     chkboxMetric.addEventListener('click', () => {
-        console.log(units);
         if (units.name != 'metric') {
             units = metric;
             imperialFields.innerHTML = '';
@@ -290,12 +290,13 @@
         const grid = document.getElementById('grid');
 
         let validationStatus = true;
-        let validationMessage = '';
+        let validationMessage = new Array;
         let name = inptName.value;
 
         if (name == '') {
             validationStatus = false;
-            validationMessage += 'Please provide your name.\n';}
+            validationMessage.push('Please provide your name.');
+        }
 
         let height;
         let weight;
@@ -309,10 +310,10 @@
 
             if (height <= 0 ) {
                 validationStatus = false;
-                validationMessage += 'Height must be a positive integer value.\n';
+                validationMessage.push('Height must be a positive integer value.');
             } else if (inptHeightFeet.value == '' || inptHeightInches.value == '') {
                 validationStatus = false;
-                validationMessage += 'Both Feet and Inches are required.\n';
+                validationMessage.push('Both Feet and Inches are required.');
             }
 
             const inptWeightLbs = document.getElementById('weight');
@@ -321,10 +322,10 @@
 
             if (weight <= 0) {
                 validationStatus = false;
-                validationMessage += 'Weight must be a positive integer value.\n';
+                validationMessage.push('Weight must be a positive integer value.');
             } else if (inptWeightLbs.value == '') {
                 validationStatus = false;
-                validationMessage += 'Weight is required\n';
+                validationMessage.push('Weight is required');
             }
 
         } else {
@@ -335,10 +336,10 @@
 
             if (height <= 0 ) {
                 validationStatus = false;
-                validationMessage += 'Height must be a positive integer value.\n';
+                validationMessage.push('Height must be a positive integer value.');
             } else if (inptCentimeters.value == '') {
                 validationStatus = false;
-                validationMessage += 'Both Feet and Inches are required.\n';
+                validationMessage.push('Height is required.');
             }
 
             const inptWeightKgs = document.getElementById('weight');
@@ -347,10 +348,10 @@
 
             if (weight <= 0) {
                 validationStatus = false;
-                validationMessage += 'Weight must be a positive integer value.\n';
+                validationMessage.push('Weight must be a positive integer value.');
             } else if (inptWeightKgs.value == '') {
                 validationStatus = false;
-                validationMessage += 'Weight is required\n';
+                validationMessage.push('Weight is required');
             }
         }
         
@@ -360,7 +361,7 @@
         // Otherwise indicate errors to user
         if (validationStatus == false ) {
             // TODO: UI Validation
-            console.log(validationMessage);
+            divError.innerHTML = `<div class="flash-error-message"> ${validationMessage.join('<br>')}</div>`;
         } else {
             // Use IIFE to get human data from form
             const human = (function (name, height, weight, diet) {

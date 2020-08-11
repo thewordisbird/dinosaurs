@@ -28,6 +28,7 @@
         <!-- Form to get user input -->
         <form id="dino-compare">
             <div class="form-container">
+                <div id="error" class="flash-error"></div>                
                 <p>Name:</p>
                 <input id="name" class="form-field__full" type="name" name="name" required>
                 <p>Units:</p>
@@ -53,7 +54,7 @@
                     <option>Omnivor</option>
                     <option>Carnivor</option>
                 </select>
-                <div id="btn">Compare Me!</div>
+                <div type="submit" id="btn">Compare Me!</div>
             </div>
         </form>
         
@@ -64,6 +65,6 @@
             <!-- Include information source -->
             <p class="fine-print">Data Sourced from <a href="https://www.wikipedia.org/">Wikipedia.org</a>, all numbers are approximations.</p>
         </footer>
-        
+
     </body>
 </html>

@@ -205,6 +205,11 @@ select {
     margin-right: 0.25em;
 }
 
+.flash-error-message {
+    background-color:lightcoral;
+    padding: 1em;
+
+}
 
 /* Footer */
 .fine-print {
