@@ -172,9 +172,11 @@
         * @description API call to dino.json to retrieve dionsaur information.
         */
         let url = './dino.json';
-
+        console.log(url);
         try {
-            let resp = await fetch(url);
+            let resp = await fetch(url, {
+                mode: 'no-cors'
+            });
             return resp.json();
             
         } catch (error) {

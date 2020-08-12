@@ -14,7 +14,7 @@ This is the first project of the Udacity Intermediate JavaScript Nanodegree. Thi
 
 ## setup/Installation
 Clone repository:
-    ```git clone https://github.com/thewordisbird/dinosaurs.git
+    ```git clone https://github.com/thewordisbird/dinosaurs.git```
 
 Run locally using a local web server such as Python's http.server.
 
