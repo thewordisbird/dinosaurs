@@ -1,4 +1,6 @@
 # Dinosaurs
+Try the demo: [https://dinosaurs.thewordisbird.dev/](https://dinosaurs.thewordisbird.dev/)
+
 A JavaScript web application that builds an infographic as a 3x3 grid of tiles (9 in total) with the human in the center tile. Each title besides the human contains the species, an image, and a fact. For the human tile, only the name of the human. 
 
 ## Motivation
