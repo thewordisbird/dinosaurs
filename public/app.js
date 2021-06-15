@@ -118,7 +118,8 @@
                 * @description Builds the image url for the dinosaur.
                 * @returns {string} A url to the image of the dinosaur.
                 */
-                return `./images/${this.species}.png`;
+                const species = this.species.toLowerCase();
+                return `images/${species}.png`;
             },
             generateTile: function (human) {
                 /**
@@ -227,7 +228,7 @@
                 * @description Builds the image url for the human.
                 * @returns {string} A url to the image of the human.
                 */
-                return './images/human.png';
+                return `images/human.png`;
             },
             generateTile: function () {
                 /**
